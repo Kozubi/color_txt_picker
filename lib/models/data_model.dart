@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 
 class DataModel {
   String name;
+  String text;
   int backgroundColorValue;
   int textColorValue;
   double textSizeValue;
@@ -9,6 +10,7 @@ class DataModel {
 
   DataModel(
       {required this.name,
+      required this.text,
       required this.backgroundColorValue,
       required this.textColorValue,
       required this.textSizeValue,
@@ -17,6 +19,7 @@ class DataModel {
   Map<String, dynamic> toMap() {
     return {
       "name": name,
+      "text": text,
       "backgroundColorValue": backgroundColorValue,
       "textColorValue": textColorValue,
       "textSizeValue": textSizeValue,
@@ -27,6 +30,7 @@ class DataModel {
   DataModel fromMap(Map<String, dynamic> data) {
     return DataModel(
         name: data['name'] ?? "No Name",
+        text: data['text'] ?? "Default TEXT 123",
         backgroundColorValue: data['backgroundColorValue'] ?? 0,
         textColorValue: data['textColorValue'] ?? 0,
         textSizeValue: data['textSizeValue'] ?? 0,

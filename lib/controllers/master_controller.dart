@@ -5,9 +5,11 @@ import 'package:google_fonts/google_fonts.dart' as fonts;
 import 'dart:io' as io;
 
 class MasterController extends getx.GetxController {
-  dynamic choosedColor = Colors.primaries[0].obs;
-  dynamic sliderValue = 16.toDouble().obs;
-  dynamic fontValue = 1.obs;
+  dynamic mainColor = Colors.primaries[0].obs; // defalut backgroundColor
+  dynamic sliderValue = 16.toDouble().obs; // size of font
+  dynamic fontValue = 0.obs; // current choosed font
+  TextEditingController textCheckController =
+      TextEditingController(); // editingcontroller for first tab
 
   List fn = fonts.GoogleFonts.asMap().keys.toList();
   dynamic listDataModel = [].obs;

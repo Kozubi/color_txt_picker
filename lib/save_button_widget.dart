@@ -10,10 +10,12 @@ class SaveButtonWidget extends StatelessWidget {
     Key? key,
     required this.masterController,
     required this.txtColorController,
+    required this.text,
   }) : super(key: key);
 
   final MasterController masterController;
   final TextColorController txtColorController;
+  final String text;
 
   @override
   Widget build(BuildContext context) {
@@ -66,11 +68,12 @@ class SaveButtonWidget extends StatelessWidget {
           }
           DataModel dataModel = DataModel(
               name: textEditingController.text,
+              text: text,
               backgroundColorValue:
-                  Colors.primaries.indexOf(masterController.choosedColor.value),
+                  Colors.primaries.indexOf(masterController.mainColor.value),
               fontTypeValue: masterController.fontValue.value,
-              textColorValue: Colors.primaries
-                  .indexOf(txtColorController.choosedColor.value),
+              textColorValue:
+                  Colors.primaries.indexOf(txtColorController.mainColor.value),
               textSizeValue: masterController.sliderValue.value);
           masterController.listDataModel.value.add(dataModel);
         });
@@ -82,10 +85,16 @@ class SaveButtonWidget extends StatelessWidget {
                 flex: 3,
                 child: Icon(
                   Icons.save,
-                  color: masterController.choosedColor.value,
+                  size: 32,
+                  color: masterController.mainColor.value,
                 ),
               ),
-              Expanded(flex: 4, child: Text("SAVE"))
+              Expanded(
+                  flex: 4,
+                  child: Text(
+                    "SAVE",
+                    style: TextStyle(fontSize: 22),
+                  ))
             ],
           )),
     );

@@ -21,11 +21,11 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return getx.GetMaterialApp(
-      title: 'Flutter Demo',
+      title: 'Google Font Viewer',
       theme: ThemeData(
           primarySwatch: Colors.blueGrey,
           backgroundColor: Colors.blueGrey[900]),
-      home: MyHomePage(title: 'Flutter Demo Home Page'),
+      home: MyHomePage(title: 'Google Font Viewer'),
     );
   }
 }
@@ -82,21 +82,50 @@ class _MyHomePageState extends State<MyHomePage> {
                         child: getx.Obx(() => Container(
                             alignment: Alignment.center,
                             margin: EdgeInsets.all(10),
-                            color: masterController.choosedColor.value,
+                            color: masterController.mainColor.value,
                             // height: 100,
                             // width: 400,
                             child: getx.Obx(
-                              () => Text("Abc 1234",
+                              () => Text(
+                                  masterController.textCheckController.text,
                                   style: GoogleFonts.getFont(
                                       masterController
                                           .fn[masterController.fontValue.value],
                                       textStyle: TextStyle(
                                           fontWeight: FontWeight.bold,
                                           color: txtColorController
-                                              .choosedColor.value,
+                                              .mainColor.value,
                                           fontSize: masterController
                                               .sliderValue.value))),
                             )))),
+                    Expanded(
+                        child: Padding(
+                      padding: EdgeInsets.all(2),
+                      child: TextField(
+                        onEditingComplete: () {
+                          FocusScope.of(context).unfocus();
+                        },
+                        onChanged: (String s) {
+                          setState(() {});
+                        },
+                        controller: masterController.textCheckController,
+                        decoration: InputDecoration(
+                            focusedBorder: OutlineInputBorder(
+                                borderSide: BorderSide(color: Colors.yellow)),
+                            enabledBorder: OutlineInputBorder(
+                                borderSide: BorderSide(color: Colors.white)),
+                            disabledBorder: InputBorder.none,
+                            border: OutlineInputBorder(
+                                borderSide: BorderSide(
+                                    color: Colors.white,
+                                    width: 10,
+                                    style: BorderStyle.solid),
+                                borderRadius: BorderRadius.circular(10))),
+                        style: TextStyle(
+                          color: Colors.white,
+                        ),
+                      ),
+                    )),
                     Expanded(
                         child: Container(
                             margin: EdgeInsets.all(10),
@@ -121,6 +150,7 @@ class _MyHomePageState extends State<MyHomePage> {
                         child: Container(
                       margin: EdgeInsets.all(5),
                       child: SaveButtonWidget(
+                        text: masterController.textCheckController.text,
                         masterController: masterController,
                         txtColorController: txtColorController,
                       ),
@@ -150,6 +180,7 @@ class SavedList extends StatelessWidget {
           var backgroundColorValue =
               masterController.listDataModel[index].backgroundColorValue;
           var sliderValue = masterController.listDataModel[index].textSizeValue;
+          var text = masterController.listDataModel[index].text;
           var l = GoogleFonts.asMap().keys.toList();
           var listOfCol = Colors.primaries;
 
@@ -159,9 +190,10 @@ class SavedList extends StatelessWidget {
                 onTap: () {
                   masterController.fontValue.value =
                       masterController.listDataModel[index].fontTypeValue;
-                  masterController.choosedColor.value =
+                  masterController.mainColor.value =
                       Colors.primaries[backgroundColorValue];
                   masterController.sliderValue.value = sliderValue;
+                  masterController.textCheckController.text = text;
                   DefaultTabController.of(context)!.animateTo(0);
                 },
                 leading: Text(masterController.listDataModel[index].name,

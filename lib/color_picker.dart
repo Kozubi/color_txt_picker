@@ -47,10 +47,10 @@ class ColorPicker extends StatelessWidget {
             ),
             items: getItems(context),
             isExpanded: false,
-            value: controller.choosedColor.value,
+            value: controller.mainColor.value,
             onTap: () {},
             onChanged: (var x) {
-              controller.choosedColor.value = x;
+              controller.mainColor.value = x;
             },
           ),
         ));

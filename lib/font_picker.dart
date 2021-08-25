@@ -47,8 +47,11 @@ class FontPicker extends StatelessWidget {
             Expanded(
                 flex: 1,
                 child: IconButton(
-                    color: textColorController.choosedColor.value,
+                    color: textColorController.mainColor.value,
                     onPressed: () {
+                      if (masterController.fontValue.value == 0) {
+                        return;
+                      }
                       masterController.fontValue.value--;
                     },
                     icon: Icon(Icons.skip_previous))),
@@ -78,7 +81,7 @@ class FontPicker extends StatelessWidget {
                     masterController.fontValue.value++;
                   },
                   icon: Icon(Icons.skip_next),
-                  color: textColorController.choosedColor.value,
+                  color: textColorController.mainColor.value,
                 )),
           ],
         ));
